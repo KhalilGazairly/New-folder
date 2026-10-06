@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير تقييم عقاري</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1b365d;
+            --secondary-color: #4a5568;
+            --accent-color: #c59b27;
+            --bg-light: #f8fafc;
+            --border-color: #cbd5e1;
+            --text-color: #1e293b;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .header-title {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 12px 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            border-radius: 6px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #e2e8f0;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .label-cell {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .value-cell {
+            background-color: #ffffff;
+        }
+
+        .section-desc {
+            background-color: var(--bg-light);
+            padding: 15px;
+            border-right: 4px solid var(--accent-color);
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gallery-container {
+            border: 1px solid #d2d2d2;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 5px;
+        }
+
+        .gallery-card {
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+       
+
+        .text-center { text-align: center; }
+        .font-bold { font-weight: 700; }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; max-width: 100%; padding: 0; }
+            .header-title { background-color: #1b365d !important; color: #fff !important; -webkit-print-color-adjust: exact; }
+            th { background-color: #e2e8f0 !important; -webkit-print-color-adjust: exact; }
+            .label-cell { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 1. بيانات التقرير -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="3">بيانات التقرير</td>
+        </tr><tr>
+            <td class="label-cell">هوية المقيّم</td>
+            <td class="label-cell">رقم الترخيص</td>
+            <td class="label-cell">تاريخ الترخيص</td>
+        </tr>
+        <tr>
+            <td class="value-cell">@AssessorID</td>
+            <td class="value-cell">@LicenseNumber</td>
+            <td class="value-cell">@LicenseDate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تاريخ التكليف</td>
+            <td class="label-cell">تاريخ المعاينة</td>
+            <td class="label-cell">تاريخ التقييم</td>
+        </tr>
+        <tr>
+            <td class="value-cell">@AssignmentDate </td>
+            <td class="value-cell">@InspectionDate</td>
+            <td class="value-cell">@AssessmentDate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تاريخ إصدار التقرير</td>
+            <td class="value-cell" colspan="5">@ReportReleaseDate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نوع التقرير</td>
+            <td class="value-cell" colspan="5">@ReportType</td>
+        </tr>
+        <tr>
+            <td class="label-cell">العنوان ورقم التواصل</td>
+            <td class="value-cell" colspan="5">@AddressContactNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نطاق العمل</td>
+            <td class="value-cell" colspan="5">@WorkScope</td>
+        </tr>
+        <tr>
+            <td class="label-cell">مستخدم التقرير</td>
+            <td class="value-cell" colspan="5">@ReportUser</td>
+        </tr>
+        <tr>
+            <td class="label-cell">الاستخدام المقصود (الغرض من التقييم)</td>
+            <td class="value-cell" colspan="5">@EvaluationPurpose</td>
+        </tr>
+        <tr>
+            <td class="label-cell">المستخدمون الآخرون</td>
+            <td class="value-cell" colspan="5">@OtherUsers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">العوامل البيئية والاجتماعية والحوكمة</td>
+            <td class="value-cell" colspan="5">@ESG</td>
+        </tr>
+        <tr>
+            <td class="label-cell">الرقم المرجعي للتقرير</td>
+            <td class="value-cell" colspan="5">@ReportReferenceNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">أساس القيمة (ذكر المصدر)</td>
+            <td class="value-cell" colspan="5">@CitingSource</td>
+        </tr>
+        <tr>
+            <td class="label-cell">أسلوب التقييم</td>
+            <td class="value-cell" colspan="5">@EvaluationMethod</td>
+        </tr>
+        <tr>
+            <td class="label-cell">فرضية القيمة</td>
+            <td class="value-cell" colspan="5">@ValueHypothesis</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عملة التقييم</td>
+            <td class="value-cell" colspan="5">@EvaluationCurrency</td>
+        </tr>
+        <tr>
+            <td class="label-cell">الامتثال للمعايير</td>
+            <td class="value-cell" colspan="5">@ComplianceWithStandards</td>
+        </tr>
+        <tr>
+            <td class="label-cell">الأصل محل التقييم</td>
+            <td class="value-cell" colspan="5">@AssetUnderEvaluation</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إقرار بالاستقلالية وعدم تضارب المصالح</td>
+            <td class="value-cell" colspan="5">@IndependenceAcknowledgment</td>
+        </tr>
+    </table>
+
+    <!-- 2. بيانات العقار -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="6">بيانات العقار</td>
+        </tr>
+        <tr>
+            <td class="label-cell">مصدر الصك</td>
+            <td class="value-cell">@DeedSource</td>
+            <td class="label-cell">رقم الصك</td>
+            <td class="value-cell">@DeedNumber</td>
+            <td class="label-cell">تاريخ الصك</td>
+            <td class="value-cell">DeedDate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">المدينة</td>
+            <td class="value-cell">@City</td>
+            <td class="label-cell">الحي</td>
+            <td class="value-cell">@Region</td>
+            <td class="label-cell">رقم القطعة</td>
+            <td class="value-cell">@ItemNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">رقم البلك</td>
+            <td class="value-cell">@BulkNumber</td>
+            <td class="label-cell">رقم المخطط</td>
+            <td class="value-cell">@SchemeNumber</td>
+            <td class="label-cell">الواجهة</td>
+            <td class="value-cell">@Interface</td>
+        </tr>
+        <tr>
+            <td class="label-cell">رقم رخصة البناء</td>
+            <td class="value-cell">@BuildingPermitNumber</td>
+            <td class="label-cell">مساحة الأرض (م²)</td>
+            <td class="value-cell">@landArea</td>
+            <td class="label-cell">عرض الشارع (م)</td>
+            <td class="value-cell">@StreetWidth</td>
+        </tr>
+        <tr>
+            <td class="label-cell">حالة البناء</td>
+            <td class="value-cell">@ConstructionStatus</td>
+            <td class="label-cell">الأصل محل التقييم</td>
+            <td class="value-cell">@TheAssetUnderEvaluation</td>
+            <td class="label-cell">رقم محضر التجزئة</td>
+            <td class="value-cell">@RetailReportNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة ملكية الصك %</td>
+            <td class="value-cell">@DeedOwnershipPercentage</td>
+            <td class="label-cell">استخدام العقار</td>
+            <td class="value-cell">@DeedUsage</td>
+            <td class="label-cell">اسم الشارع</td>
+            <td class="value-cell">@StreetName</td>
+        </tr>
+        <tr>
+            <td class="label-cell">حالة الصك</td>
+            <td class="value-cell">@InstrumentStatus</td>
+            <td class="label-cell">حالة منطقة العقار</td>
+            <td class="value-cell">@PropertyAreaStatus</td>
+            <td class="label-cell">اسم أقرب شارع رئيسي</td>
+            <td class="value-cell">@NearestMainStreetName</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نوع الملكية</td>
+            <td class="value-cell">@OwnershipType</td>
+            <td class="label-cell">عدد الأدوار</td>
+            <td class="value-cell">@RolesNumber</td>
+            <td class="label-cell">عمر البناء (سنة)</td>
+            <td class="value-cell">@BuildingAge</td>
+        </tr>
+        <tr>
+            <td class="label-cell">اسم مالك العقار</td>
+            <td class="value-cell" colspan="5">@PropertyOwnerName</td>
+        </tr>
+        <tr>
+            <td class="label-cell">احداثيات الموقع</td>
+            <td class="value-cell" colspan="5">@LocationCoordinates</td>
+        </tr>
+        <tr>
+            <td class="label-cell">وصف العقار</td>
+            <td class="value-cell" colspan="5">@PropertyDescription</td>
+        </tr>
+    </table>
+
+    <!-- 3. معاينة الأصل -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="6">معاينة الأصل</td>
+        </tr>
+        <tr>
+            <td class="label-cell">الخدمات المتوفرة</td>
+            <td class="value-cell" colspan="5">@AvailableServices</td>
+        </tr>
+        <tr>
+            <td class="label-cell">المرافق المحيطة</td>
+            <td class="value-cell" colspan="5">@SurroundingFacilities</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عدد الغرف</td>
+            <td class="value-cell">@RoomsNumber</td>
+            <td class="label-cell">عدد الصالات</td>
+            <td class="value-cell">@HallsNumber</td>
+            <td class="label-cell">عدد الشقق</td>
+            <td class="value-cell">@ApartmentsNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عدد دورات المياه</td>
+            <td class="value-cell">@ToiletsNumber</td>
+            <td class="label-cell">عمر العقار (سنة)</td>
+            <td class="value-cell">@PropertyAge</td>
+            <td class="label-cell">مدخل سيارة</td>
+            <td class="value-cell">@CarEntrance</td>
+        </tr>
+        <tr>
+            <td class="label-cell">يوجد قبو</td>
+            <td class="value-cell">@IsThereBasement</td>
+            <td class="label-cell">يوجد مصعد</td>
+            <td class="value-cell">@IsThereElevator</td>
+            <td class="label-cell">مطبخ</td>
+            <td class="value-cell">@kitchen</td>
+        </tr>
+        <tr>
+            <td class="label-cell">التشطيبات</td>
+            <td class="value-cell">@Finishes</td>
+            <td class="label-cell">يوجد مسبح</td>
+            <td class="value-cell">@IsThereSwimmingPool</td>
+            <td class="label-cell">حالة الإشغال</td>
+            <td class="value-cell">@OccupancyStatus</td>
+        </tr>
+        <tr>
+            <td class="label-cell">حجم الطلب على العقار</td>
+            <td class="value-cell">@realEstateDemand</td>
+            <td class="label-cell">حالة الحي</td>
+            <td class="value-cell">@NeighborhoodStatus</td>
+            <td class="label-cell">يوجد منقولات</td>
+            <td class="value-cell">@AreThereBelongings</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عدد الآبار</td>
+            <td class="value-cell">@WellsNumber</td>
+            <td class="label-cell">عدد المزروعات</td>
+            <td class="value-cell">@CropsNumber</td>
+            <td class="label-cell">عدد المعارض</td>
+            <td class="value-cell">@ExhibitionsNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">طريقة الوصول للعقار</td>
+            <td class="value-cell" colspan="5">@AccessPropertyWay</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عدد الشوارع</td>
+            <td class="value-cell" colspan="5">@StreetsNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">أخرى</td>
+            <td class="value-cell" colspan="5">@Others</td>
+        </tr>
+    </table>
+
+    <!-- 4. الحدود والأطوال -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="3">الحدود والأطوال للأصل</td>
+        </tr>
+            <tr>
+                <th class="label-cell text-center">الجهة</th>
+                <th class="label-cell text-center">الوصف</th>
+                <th class="label-cell text-center">الطول (م)</th>
+            </tr>
+        <tbody>
+            <tr>
+                <td class="label-cell text-center">الشمال</td>
+                <td>@NorthernBoundaryDescription</td>
+                <td>@NorthernBoundaryLength</td>
+            </tr>
+            <tr>
+                <td class="label-cell text-center">الشرق</td>
+                <td>@EastBoundaryDescription</td>
+                <td>@EastBoundaryLength</td>
+            </tr>
+            <tr>
+                <td class="label-cell text-center">الجنوب</td>
+                <td>@SouthBoundaryDescription</td>
+                <td>@SouthBoundaryLength</td>
+            </tr>
+            <tr>
+                <td class="label-cell text-center">الغرب</td>
+                <td>@WestBoundaryDescription</td>
+                <td>@WestBoundaryLength</td>
+            </tr>
+        </tbody>
+        <tr>
+            <td class="label-cell" colspan="3">يجب ان يتم وضع حدود وأطوال الصك وإذا اختلفت على الطبيعة يجب ان تذكر كملاحظات</td>
+        </tr>
+    </table>
+
+    <!-- 5. تصنيف مستوى التشطيبات -->
+
+
+    <table>
+         <tr>
+            <td class="label-cell" colspan="3">تصنيف مستوى تشطيبات البناء</td>
+        </tr>
+         <tr>
+            <td colspan="3">
+        تم تقدير تكاليف البناء بالاستناد إلى دليل الأسعار الاسترشادية الصادر عن الهيئة السعودية للمقيمين المعتمدين، مع إجراء التعديلات المهنية اللازمة بما يتلاءم مع طبيعة العقار محل التقييم ومواصفاته وظروف السوق بتاريخ التقييم.
+            </td>
+        </tr>
+            <tr>
+                <td class="text-center" width="33%">☐ تشطيب فاخر</td>
+                <td class="text-center" width="33%">☐ تشطيب متوسط</td>
+                <td class="text-center" width="33%">☐ تشطيب عادي</td>
+            </tr>
+        <tbody>
+            <tr>
+                <td style="vertical-align: top;">
+                    <strong>تشطيبات خارجية:</strong><br>
+                    الواجهات من الحجر الطبيعي أو دهان ذو جودة عالية، نوعية الأبواب الخارجية، نوعية أرضيات الساحات الخارجية.<br><br>
+                    <strong>تشطيبات داخلية:</strong><br>
+                    نوعية أرضيات المداخل والمجالس وصالات الطعام تتكون من رخام فاخر، نوعية الأبواب الداخلية، نوعية العزل، نوعية الشبابيك، مكونات الجدران الخارجية تكون مزدوجة، نوعية التسليك والسباكة، نوعية الدهان الداخلي، أعمال الجبس بأشكال هندسية وجودتها، تكييف مركزي، مصعد، جودة أعمال التشطيب.
+                </td>
+                <td style="vertical-align: top;">
+                    <strong>تشطيبات خارجية:</strong><br>
+                    الواجهات من حجر أو دهان، نوعية الأبواب الخارجية، نوعية أرضيات الساحات الخارجية غالباً من السيراميك، مكونات الجدران الداخلية تكون مزدوجة.<br><br>
+                    <strong>تشطيبات داخلية:</strong><br>
+                    نوعية أرضيات المداخل والمجالس وصالات الطعام تتكون من السيراميك، نوعية الأبواب الداخلية، نوعية العزل، نوعية الشبابيك، مكونات الجدران الخارجية تكون مزدوجة، نوعية التسليك والسباكة، نوعية الدهان الداخلي، أعمال الجبس بأشكال هندسية وجودتها، تكييف منفصل (سبليت).
+                </td>
+                <td style="vertical-align: top;">
+                    <strong>تشطيبات خارجية:</strong><br>
+                    الواجهات من دهان، نوعية الأبواب الخارجية، نوعية أرضيات الساحات الخارجية غالباً من البلاط.<br><br>
+                    <strong>تشطيبات داخلية:</strong><br>
+                    نوعية أرضيات المداخل والمجالس وصالات الطعام تتكون من السيراميك العادي أو البلاط، الفرش موكيت، نوعية الأبواب الداخلية، لا يوجد عوازل، نوعية الشبابيك عادية، نوعية التسليك والسباكة، نوعية الدهان الداخلي، لا يوجد جبس بالأسقف، تكييف شباك.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- 6. النطاق والقيود والاعتمادات -->
+
+    <table>
+         <tr>
+            <td class="label-cell">
+                طبيعة عمل المقيم ونطاقه والقيود المفروضة عليه           
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <td style="vertical-align: top;">
+                           تم إعداد تقرير التقييم وفقاً لشروط الاتفاقية المبرمة مع العميل، ويُعد هذا التقرير وما يتضمنه من معلومات ونتائج سرياً ومخصصاً للاستخدام من قبل الطرف المرسل إليه فقط وللغرض الذي أُعد من أجله. ولا يجوز استخدام التقرير أو الاستناد إليه من قبل أي طرف آخر، كما لا يجوز نشره كلياً أو جزئياً أو الإشارة إليه في أي وثيقة، أو بيان، أو تعميم، أو تداوله بأي وسيلة كانت أو نقله إلى أي طرف آخر أو عرضه للرأي العام دون الحصول على موافقة خطية مسبقة من شركة (اسم المقيم).
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    
+    <table>
+         <tr>
+            <td class="label-cell">
+                طبيعة المعلومات التي يعتمد عليها المقيم ومصدرها بالتقرير
+            </td>
+        </tr>
+        <tbody>
+            <tr>
+                <td style="vertical-align: top;">
+        تم إعداد هذا التقييم بالاعتماد على بيانات ومعلومات تم جمعها من مصادر متعددة، شملت قاعدة البيانات الداخلية لدى شركة التقييم، والصفقات العقارية المسجلة في المنصات الحكومية، إضافةً إلى العروض القائمة التي تم رصدها من خلال المسح الميداني والمصادر الإلكترونية (الإعلانات العقارية والمنصات الرقمية).<br>
+        وقد تم اختيار وتحليل العقارات المقارنة الأكثر تشابهاً مع العقار محل التقييم من حيث الموقع، والمساحة، والاستخدام، والخصائص، مع إجراء التسويات اللازمة بما يعكس ظروف السوق السائدة. كما تم التحقق من مستوى الأسعار والتعاملات الفعلية في المنطقة محل التقييم بقدر الإمكان.
+            </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <table>
+        <tr>
+            <td class="label-cell">العوامل البيئية والاجتماعية والحوكمة (ESG)</td>
+        </tr>
+        <tr>
+            <td class="value-cell">@ESG</td>
+        </tr>
+    </table>
+
+    <!-- 7. أسلوب التقييم المستخدم -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="3">أسلوب التقييم المستخدم</td>
+        </tr>
+        <tr>
+            <td class="text-center">☐ أسلوب السوق</td>
+            <td class="text-center">☐ أسلوب الدخل</td>
+            <td class="text-center">☐ أسلوب التكلفة</td>
+        </tr>
+        <tr>
+            <td>@MarketStyle</td>
+            <td>
+                <div class="checkbox-group" style="justify-content: space-around; padding: 10px 0;flex-direction: column;gap: 10px;">
+                    <div class="checkbox-item">- @InvestmentMethod</div>
+                    <div class="checkbox-item">- @CashFlowMethod</div>
+                    <div class="checkbox-item">- @ResidualValueMethod</div>
+                    <div class="checkbox-item">- @ProfitsMethod</div>
+                </div>
+            </td>
+            <td>@CostStyle</td>
+        </tr>
+        <tr>
+            <td class="label-cell"  colspan="3">الافتراضات الخاصة - إن وجدت -</td>
+        </tr>
+        <tr>
+            <td class="value-cell"  colspan="3">@SpecialAssumptions</td>
+        </tr>
+    </table>
+
+    
+    <table>
+        <tr>
+            <td class="label-cell">القيود المفروضة على استخدام التقرير وتوزيعه ونشره</td>
+        </tr>
+        <tr>
+            <td class="value-cell" >@ReportRestrictionsImposed</td>
+        </tr>
+    </table>
+
+     <table>
+        <tr>
+            <td class="label-cell">الملاحظات</td>
+        </tr>
+        <tr>
+            <td class="value-cell">@Notes</td>
+        </tr>
+    </table>
+
+
+    <!-- 8. العقارات المقارنة -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="7">العقارات المقارنة (أسلوب السوق)</td>
+        </tr>
+            <tr>
+                <td class="label-cell">رقم العقار المقارن / المرجع</td>
+                <td class="label-cell">نوع الصفقة (تنفيذ / سوم / حد)</td>
+                <td class="label-cell">مساحة العقار المقارن (م²)</td>
+                <td class="label-cell">تاريخ الصفقة</td>
+                <td class="label-cell">سعر الصفقة (ر.س)</td>
+                <td class="label-cell">سعر المتر (ر.س/م²)</td>
+                <td class="label-cell">رابط خرائط Google</td>
+            </tr>
+        <tbody>
+            <tr>
+                <td class="text-center">@ComparablePropertyNumber</td>
+                <td>@TransactionType</td>
+                <td>@ComparativePropertyArea</td>
+                <td>@TransactionDate</td>
+                <td>@TransactionCost</td>
+                <td>@PricePerMeter</td>
+                <td>@LocationLink</td>
+            </tr>
+            <tr>
+                <td class="label-cell">وصف المقارنة والمصدر</td>
+                <td class="value-cell" colspan="6">@ComparisonDescription</td>
+            </tr>
+             <tr>
+                <td class="label-cell">رقم العقار المقارن / المرجع</td>
+                <td class="label-cell">نوع الصفقة (تنفيذ / سوم / حد)</td>
+                <td class="label-cell">مساحة العقار المقارن (م²)</td>
+                <td class="label-cell">تاريخ الصفقة</td>
+                <td class="label-cell">سعر الصفقة (ر.س)</td>
+                <td class="label-cell">سعر المتر (ر.س/م²)</td>
+                <td class="label-cell">رابط خرائط Google</td>
+            </tr>
+            <tr>
+                 <td class="text-center">@ComparablePropertyNumber</td>
+                <td>@TransactionType</td>
+                <td>@ComparativePropertyArea</td>
+                <td>@TransactionDate</td>
+                <td>@TransactionCost</td>
+                <td>@PricePerMeter</td>
+                <td>@LocationLink</td>
+            </tr>
+            <tr>
+                <td class="label-cell">وصف المقارنة والمصدر</td>
+                <td class="value-cell" colspan="6">@ComparisonDescription</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 9. جدول التسويات -->
+    <table>
+        <tr>
+                <td class="label-cell" colspan="1"></td>
+                <td class="label-cell" colspan="4">جدول التسويات (أسلوب السوق)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">عناصر المقارنة</td>
+                <td class="label-cell">العقار محل التقييم</td>
+                <td class="label-cell">العقار المقارن (1)</td>
+                <td class="label-cell">العقار المقارن (2)</td>
+                <td class="label-cell">العقار المقارن (3)</td>
+            </tr>
+        <tbody>
+            <tr>
+                <td>شروط التمويل</td>
+                <td>-</td>
+                <td>@FinancingTerms1</td>
+                <td>@FinancingTerms2</td>
+                <td>@FinancingTerms3</td>
+            </tr>
+            <tr>
+                <td>ظروف السوق</td>
+                <td>-</td>
+                <td>@MarketConditions1</td>
+                <td>@MarketConditions2</td>
+                <td>@MarketConditions3</td>
+            </tr>
+            <tr>
+                <td>إجمالي تسويات شروط التمويل وظروف السوق %</td>
+                <td>-</td>
+                <td>@TotalFinancingMarketSettlements</td>
+                <td>@TotalFinancingMarketSettlements</td>
+                <td>@TotalFinancingMarketSettlements</td>
+            </tr>
+            <tr>
+                <td colspan="2">سعر البيع بعد تسوية شروط التمويل وظروف السوق</td>
+                <td>@PricePerMeterAfterSettlingFinancingMarketConditions1</td>
+                <td>@PricePerMeterAfterSettlingFinancingMarketConditions2</td>
+                <td>@PricePerMeterAfterSettlingFinancingMarketConditions3</td>
+            </tr>
+            <tr>
+                <td>تسوية المساحة</td>
+                <td>-</td>
+                <td>@AreaLeveling1</td>
+                <td>@AreaLeveling2</td>
+                <td>@AreaLeveling3</td>
+            </tr>
+            <tr>
+                <td>تسويات أخرى (الملكية، الاستخدام، الموقع، تضاريس الأرض، الشكل، الشوارع...)</td>
+                <td>-</td>
+                <td>@AdditionalPropertyAdjustments1</td>
+                <td>@AdditionalPropertyAdjustments2</td>
+                <td>@AdditionalPropertyAdjustments3</td>
+            </tr>
+            <tr>
+                <td colspan="2">مجموع نسب التسويات (%)</td>
+                <td>@TotalPercentagesPrivateSettlements1</td>
+                <td>@TotalPercentagesPrivateSettlements2</td>
+                <td>@TotalPercentagesPrivateSettlements3</td>
+            </tr>
+            <tr>
+                <td colspan="2">سعر المتر بعد تعديلات التسويات</td>
+                <td>@PricePerMeterAfterAllAdjustments1</td>
+                <td>@PricePerMeterAfterAllAdjustments2</td>
+                <td>@PricePerMeterAfterAllAdjustments3</td>
+            </tr>
+            <tr>
+                <td class="label-cell" colspan="2">الأوزان النسبية للعقارات المقارنة</td>
+                <td class="label-cell">@RelativeWeight1</td>
+                <td class="label-cell">@RelativeWeight2</td>
+                <td class="label-cell">@RelativeWeight3</td>
+            </tr>
+            <tr class="font-bold">
+                <td class="label-cell" colspan="2">سعر المتر بعد ترجيح الأوزان النسبية</td>
+                <td class="label-cell" colspan="3">@PricePerMeterAfterRounding</td>
+            </tr>
+            <tr class="font-bold" style="background-color: #e2e8f0;">
+                <td class="label-cell" colspan="2">قيمة العقار بأسلوب السوق</td>
+                <td class="label-cell" colspan="3">@PropertyValuationUsingMarketMethods</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 10. أسلوب التكلفة -->
+    <table>
+        <tr>
+                <td class="label-cell" colspan="4">أسلوب التكلفة</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>المساحة (م²)</td>
+                <td>سعر المتر المربع (ر.س/م²)</td>
+                <td>الإجمالي بالريال</td>
+            </tr>
+        <tbody>
+            <tr>
+                <td>مساحة الأرض</td>
+                <td colspan="3">@LandArea</td>
+            </tr>
+            <tr>
+                <td>مساحة الدور الأرضي</td>
+                <td>@GroundFloorArea</td>
+                <td>@GroundFloorCostPerMeter</td>
+                <td>@TotalCostOfGroundFloor</td>
+            </tr>
+            <tr>
+                <td>مساحة الدور الأول</td>
+                <td>@FirstFloorArea</td>
+                <td>@FirstFloorCostPerMeter</td>
+                <td>@TotalCostOfFirstFloor</td>
+            </tr>
+            <tr>
+                <td>مساحة الأدوار المتكررة</td>
+                <td>@RepeatedFloorsArea</td>
+                <td>@RepeatedFloorsCostPerMeter</td>
+                <td>@TotalCostOfRepeatedFloors</td>
+            </tr>
+            <tr>
+                <td>مساحة الأسوار</td>
+                <td>@FenceArea</td>
+                <td>@FenceCostPerMeter</td>
+                <td>@TotalCostOfFence</td>
+            </tr>
+            <tr>
+                <td>مساحة القبو / المواقف</td>
+                <td>@BasementArea</td>
+                <td>@BasementCostPerMeter</td>
+                <td>@TotalCostOfBasement</td>
+            </tr>
+            <tr>
+                <td>مساحة الملاحق</td>
+                <td>@AnnexArea</td>
+                <td>@AnnexCostPerMeter</td>
+                <td>@TotalCostOfAnnex</td>
+            </tr>
+            <tr>
+                <td>مساحة أخرى</td>
+                <td>@OtherArea</td>
+                <td>@OtherCostPerMeter</td>
+                <td>@TotalCostOfOther</td>
+            </tr>
+            <tr class="font-bold">
+                <td>إجمالي مسطحات المباني</td>
+                <td>@TotalBuildingAreas</td>
+                <td>@TotalBuildingCostPerMeter</td>
+                <td>@TotalCostOfTotalBuilding</td>
+            </tr>
+            <tr>
+                <td class="label-cell" colspan="4">البيان</td>
+            </tr>
+            <tr>
+                <td>تكاليف البناء </td>
+                <td colspan="3">@ConstructionCosts</td>
+            </tr>
+            <tr>
+                <td>التكاليف المباشرة</td>
+                <td colspan="3">@DirectCosts</td>
+            </tr>
+                <td>التكاليف غير المباشرة</td>
+                <td colspan="3">@IndirectCosts</td>
+            </tr>
+             </tr>
+                <td class="font-bold">إجمالي التكاليف</td>
+                <td class="font-bold" colspan="3">@TotalCosts</td>
+            </tr>
+
+
+            
+            <tr>
+                <td class="label-cell" colspan="4">ناقصاً التقادمات والاهتلاكات</td>
+            </tr>
+            <tr>
+                <td>1- التقادم المادي </td>
+                <td colspan="3">@MaterialPrescription</td>
+            </tr>
+            <tr>
+                <td>2- التقادم الوظيفي</td>
+                <td colspan="3">@JobObsolescence</td>
+            </tr>
+            <tr>
+                <td>3- التقادم الاقتصادي</td>
+                <td colspan="3">@EconomicObsolescence</td>
+            </tr>
+            <tr>
+                <td class="font-bold">إجمالي التقادمات (1+2+3)</td>
+                <td class="font-bold" colspan="3">@TotalStatuteOfLimitations</td>
+            </tr>
+            <tr>
+                <td>القيمة المهلكة للمباني</td>
+                <td colspan="3">@BuildingsDestructiveValue</td>
+            </tr>
+            <tr>
+                <td>العمر الاقتصادي المفترض (المفترض)</td>
+                <td colspan="3">@PresumedEconomicAge</td>
+            </tr>
+             <tr>
+                <td>العمر الفعال</td>
+                <td colspan="3">@EffectiveAge</td>
+            </tr>
+             <tr>
+                <td>العمر الممتد (إن وجد)</td>
+                <td colspan="3">@ExtendedLife</td>
+            </tr>
+             <tr>
+                <td> الإهلاك الإجمالي </td>
+                <td colspan="3">@TotalDepreciation</td>
+            </tr>
+             <tr>
+                <td>القيمة المهلكة للمباني</td>
+                <td colspan="3">@BuildingsDestructiveValue</td>
+            </tr>
+             <tr>
+                <td> قيمة الأرض</td>
+                <td colspan="3">@LandValue</td>
+            </tr>
+             <tr>
+                <td>أرباح المطور</td>
+                <td colspan="3">@DeveloperProfits</td>
+            </tr>
+             <tr>
+                <td>القيمة السوقية بأسلوب التكلفة</td>
+                <td colspan="3">@MarketValueUsingCostMethod</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- 11. أسلوب الدخل - طريقة رسملة الدخل -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="2">أسلوب الدخل (طريقة رسملة الدخل)</td>
+        </tr>
+        <tr>
+            <td>إجمالي الدخل السنوي</td>
+            <td class="value-cell">@TotalAnnualIncome</td>
+        </tr>
+        <tr>
+            <td>خصم خسائر عدم الإشغال والائتمان</td>
+            <td class="value-cell">@CreditLossesDiscounting</td>
+        </tr>
+        <tr>
+            <td>إجمالي الدخل الفعلي</td>
+            <td class="value-cell">@ActualTotalIncome</td>
+        </tr>
+        <tr>
+            <td>خصم النفقات التشغيلية والرأسمالية</td>
+            <td class="value-cell">@OperatingMaintenanceExpensesRatio</td>
+        </tr>
+        <tr>
+            <td>صافي الدخل التشغيلي</td>
+            <td class="value-cell font-bold">@NOI</td>
+        </tr>
+        <tr>
+            <td>معدل الرسملة</td>
+            <td class="value-cell">@CapitalizationRate</td>
+        </tr>
+        <tr>
+            <td>القيمة السوقية باستخدام طريقة رسملة الدخل</td>
+            <td class="value-cell">@MarketValueUsingIncomeCapitalizationMethod</td>
+        </tr>
+        <tr>
+            <td colspan="2">يجب ارفاق مصادر طرق استخلاص معدل الخصم و الرسملة1</td>
+        </tr>
+        <tr>
+            <td colspan="2">@SourceCapitalizationRateExtraction</td>
+        </tr>
+    </table>
+
+    <!-- 12. أسلوب الدخل - طريقة القيمة المتبقية -->
+    <table>
+        <tr>
+            <td class="label-cell" colspan="2">أسلوب الدخل (طريقة القيمة المتبقية)</td>
+        </tr>
+        <tr>
+            <td class="label-cell">مساحة الأرض الإجمالية (م²)</td>
+            <td class="value-cell">@TotalLandArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة مساحة الخدمات %</td>
+            <td class="value-cell">@ServiceAreaRatio</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة الخدمات</td>
+            <td class="value-cell">@TotalServiceArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة المستغلة %</td>
+            <td class="value-cell">@PercentageUtilizedArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي المساحة المستغلة</td>
+            <td class="value-cell">@TotalAreaUtilized</td>
+        </tr>
+
+        <tr>
+            <td class="label-cell" colspan="2">الجزء السكني</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة للجزء السكني</td>
+            <td class="value-cell">@AreaRatioForResidentialSection</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة السكني</td>
+            <td class="value-cell">@TotalResidentialArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">@PricePerSquareMeterResidential</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة الجزء السكني</td>
+            <td class="value-cell">@ResidentialTotalValue</td>
+        </tr>
+        
+
+        <tr>
+            <td class="label-cell" colspan="2">الجزء التجاري</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة للجزء التجاري</td>
+            <td class="value-cell">@AreaRatioForCommercialSection</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة التجاري</td>
+            <td class="value-cell">@TotalCommercialArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">@PricePerSquareMeterCommercial</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة الجزء التجاري</td>
+            <td class="value-cell">@CommercialTotalValue</td>
+        </tr>
+        
+
+        <tr>
+            <td class="label-cell" colspan="2">الجزء السكني / التجاري</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة للجزء السكني التجاري</td>
+            <td class="value-cell">@AreaRatioForResidentialCommercialSection</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة السكني التجاري</td>
+            <td class="value-cell">@TotalResidentialCommercialArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">@PricePerSquareMeterResidentialCommercial</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة الجزء السكني التجاري</td>
+            <td class="value-cell">@ResidentialCommercialTotalValue</td>
+        </tr>
+        
+
+        <tr>
+            <td class="label-cell" colspan="2">الجزء الصناعي</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة للجزء الصناعي</td>
+            <td class="value-cell">@AreaRatioForIndustrialSection</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة الصناعي</td>
+            <td class="value-cell">@TotalIndustrialArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">@PricePerSquareMeterIndustrial</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة الجزء الصناعي</td>
+            <td class="value-cell">@IndustrialTotalValue</td>
+        </tr>
+        
+
+        <tr>
+            <td class="label-cell" colspan="2">أخرى</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة المساحة</td>
+            <td class="value-cell">@AreaRatioForOtherSection</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي مساحة </td>
+            <td class="value-cell">@TotalOtherArea</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">@PricePerSquareMeterOther</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة الجزء </td>
+            <td class="value-cell">@OtherTotalValue</td>
+        </tr>
+        
+    </table>
+
+    <table>
+        <tr>
+            <td class="label-cell" colspan="2">حساب تكاليف التطوير (المباشرة)</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تكلفة تطوير الموقع (ر.س/م²)</td>
+            <td class="value-cell">@LocationDevelopmentCost</td>
+        </tr>
+        <tr>
+            <td class="label-cell font-bold">إجمالي تكلفة التطوير المباشرة</td>
+            <td class="value-cell font-bold">@DirectTotalDevelopmentCost</td>
+        </tr>
+    </table>
+    <table>
+
+        <tr>
+            <td class="label-cell" colspan="2">حسبا تكاليف التطوير (التكاليف الغير المباشرة) </td>
+        </tr>
+
+        <tr>
+            <td class="label-cell">معدل تكاليف الاستشارات (الهندسية وغيرها) </td>
+            <td class="value-cell">@ConsultingCostRate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تكلفة الاستشارات الهندسية وغيرها</td>
+            <td class="value-cell">@ConsultingCosts</td>
+        </tr>
+        <tr>
+            <td class="label-cell">معدل أى تكاليف الأخرى</td>
+            <td class="value-cell">@RateOtherCosts</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تكلفة التكاليف الأخرى</td>
+            <td class="value-cell">@OtherCosts</td>
+        </tr>
+        <tr>
+            <td class="label-cell">معدل نسبة المخاطرة </td>
+            <td class="value-cell">@RiskRatio</td>
+        </tr>
+        <tr>
+            <td class="label-cell">قيمة المخاطرة </td>
+            <td class="value-cell">@RiskValue</td>
+        </tr>
+        <tr>
+            <td class="label-cell">عدد سنوات التطوير</td>
+            <td class="value-cell">@DevelopmentYearsNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">معدل تكلفة التمويل </td>
+            <td class="value-cell">@FinancingCostRate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تكلفة التمويل </td>
+            <td class="value-cell">@FinancingCost</td>
+        </tr>
+        <tr class="font-bold">
+            <td class="label-cell">إجمالي قيمة تكاليف التطوير (المباشرة والغير مباشرة)</td>
+            <td class="value-cell">@DevelopmentCostsTotalValue</td>
+        </tr>
+
+
+        <tr>
+            <td class="label-cell" colspan="2">حساب ربحية المطور </td>
+        </tr>
+
+        <tr>
+            <td class="label-cell">معدل ربحية التطوير </td>
+            <td class="value-cell">@DevelopmentProfitabilityRate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي ربحية التطوير</td>
+            <td class="value-cell">@TotalDevelopmentProfitability</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي تكاليف التطوير + الربحية</td>
+            <td class="value-cell">@TotalDevelopmentProfitabilityCosts</td>
+        </tr>
+
+
+        <tr>
+            <td class="label-cell" colspan="2">حساب قيمة الأرض </td>
+        </tr>
+
+        <tr>
+            <td class="label-cell">قيمة الأرض </td>
+            <td class="value-cell">@LandValue</td>
+        </tr>
+        <tr>
+            <td class="label-cell">مدة التنفيذ</td>
+            <td class="value-cell">@ImplementationPeriod</td>
+        </tr>
+        <tr>
+            <td class="label-cell">معدل الخصم</td>
+            <td class="value-cell">@DiscountRate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">القيمة الحالية للأرض</td>
+            <td class="value-cell">@LandCurrentValue</td>
+        </tr>
+        <tr>
+            <td class="label-cell">سعر المتر</td>
+            <td class="value-cell">PricePerMeter</td>
+        </tr>
+    </table>
+
+
+    <!-- 13. طريقة التدفقات النقدية المخصومة -->
+    <div style="overflow-x: auto;">
+        <table>
+        <tr>
+            <td class="label-cell" colspan="10">طريقة التدفقات النقدية المخصومة </td>
+        </tr>
+                <tr>
+                    <td class="label-cell">السنة الميلادية</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>9</td>
+                </tr>
+            <tbody>
+                <tr>
+                    <td class="label-cell">نسبة النمو (%) / معدل الرسملة النهائية %</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="label-cell">إجمالي دخل العقار (ريال)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">معدل الأشغال (%)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">الدخل الفعلي بعد خصم الشواغر (ريال)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">نسبة مصاريف التشغيل والصيانة (%)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr class="font-bold">
+                    <td class="label-cell">صافي الدخل التشغيلي (NOI)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">القيمة الحالية للتدفق (ريال)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">القيمة الاستردادية (ريال)</td>
+                    <td colspan="9"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">معدل الخصم (%)</td>
+                    <td colspan="9"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">إجمالي صافي القيمة الحالية (ريال)</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">إجمالي القيمة بطريقة التدفقات النقدية المخصومة (ريال)</td>
+                    <td colspan="9"></td>
+                </tr>
+                <tr>
+                    <td colspan="10" class="label-cell">يجب إرفاق مصادر طرق استخلاص معدل الخصم ومعدل الرسملة</td>
+                </tr>
+                <tr>
+                    <td colspan="10" >مصدر معدل الخصم والرسملة</td>
+                </tr>
+                <tr>
+                    <td colspan="10">@DiscountRateCapitalizationSource</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- 14. طريقة الأرباح -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">طريقة الأرباح</th>
+            </tr>
+        </thead>
+        <thead>
+            <tr>
+                <th colspan="2">الإيرادات (Revenue)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>إيرادات الأطعمة والمشروبات (ر.س)</td>
+                <td>@FoodBeverageRevenues</td>
+            </tr>
+            <tr>
+                <td>إيرادات الغرف / الوحدات (ر.س)</td>
+                <td>@UnitRevenue</td>
+            </tr>
+            <tr>
+                <td>إيرادات أخرى (ر.س)</td>
+                <td>@OtherRevenues</td>
+            </tr>
+            <tr class="font-bold">
+                <td>إجمالي الإيرادات</td>
+                <td>@TotalRevenue</td>
+            </tr>
+            <thead>
+                <tr>
+                    <th colspan="2">تكلفة المبيعات (Cost of Sales)</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>تكاليف المبيعات (ر.س)</td>
+                <td>@SalesCosts</td>
+            </tr>
+            <tr class="font-bold">
+                <td>مجمل الربح</td>
+                <td>@GrossProfit</td>
+            </tr>
+            
+            <thead>
+                <tr>
+                    <th colspan="2">المصاريف التشغيلية (Operating Expenses)</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>المصاريف التشغيلية (ر.س)</td>
+                <td>@OperatingExpenses</td>
+            </tr>
+            <tr>
+                <td>مصاريف الإدارة والتشغيل (ر.س)</td>
+                <td>@AdministrativeOperatingExpenses</td>
+            </tr>
+            <tr>
+                <td>مصاريف أخرى (ر.س)</td>
+                <td>@OtherExpenses</td>
+            </tr>
+            <tr class="font-bold">
+                <td>صافي الربح التشغيلي</td>
+                <td>@NetOperatingProfit</td>
+            </tr>
+            <thead>
+                <tr>
+                    <th colspan="2">حصة المشغل (Operator’s Share)</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>نسبة حصة المشغل %</td>
+                <td>@OperatorSharePercentage</td>
+            </tr>
+            <tr>
+                <td>قيمة حصة المشغل</td>
+                <td>@OperatorShareValue</td>
+            </tr>
+            <tr class="font-bold">
+                <td>صافي دخل العقار</td>
+                <td>@netPropertyIncome</td>
+            </tr>
+            
+            <thead>
+                <tr>
+                    <th colspan="2">الرسملة (Capitalization)</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>عامل شراء السنوات</td>
+                <td>@YearsPurchaseFactor</td>
+            </tr>
+            <tr>
+                <td>قيمة العقار</td>
+                <td>@PropertyValue</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 15. ترجيح النتائج وتحديد القيمة -->
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>القيمة السوقية بأسلوب السوق</th>
+                <th>القيمة السوقية بأسلوب الدخل</th>
+                <th>القيمة السوقية بأسلوب التكلفة</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>الأوزان النسبية للطرق المستخدمة %</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="font-bold">
+                <td>مساهمة الطرق المستخدمة حسب الوزن النسبي %</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label-cell">أسباب الترجيح بين مؤشرات القيمة (إن وجدت)</td>
+                <td class="value-cell" colspan="3"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td class="label-cell" colspan="2">تقدير القيمة</td>
+        </tr>
+        <tr>
+            <td class="label-cell">قيمة الأرض رقماً</td>
+            <td class="value-cell">@LandValueInNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">قيمة المباني رقماً</td>
+            <td class="value-cell">@BuildingsValueInNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة العقار رقماً</td>
+            <td class="value-cell">@TotalVropertyValueInNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">إجمالي قيمة العقار كتابةً</td>
+            <td class="value-cell">@TotalVropertyValueWriting</td>
+        </tr>
+        <tr>
+            <td class="label-cell">نسبة خصم البيع القسري %</td>
+            <td class="value-cell">@ForcedSaleDiscountRate</td>
+        </tr>
+        <tr>
+            <td class="label-cell">قيمة البيع القسري رقماً</td>
+            <td class="value-cell">@ForcedSaleValueInNumbers</td>
+        </tr>
+        <tr>
+            <td class="label-cell">قيمة البيع القسري كتابةً</td>
+            <td class="value-cell">>@ForcedSaleValueWritten</td>
+        </tr>
+    </table>
+
+    <!-- 16. الصور والمرفقات -->
+    <div class="header-title">المرفقات والصور الفوتوغرافية</div>
+    <div class="section-desc">
+        يجب التقاط صور فوتوغرافية لكامل العقار تشمل الواجهات الخارجية، والمرافق المحيطة، والغرف والمحتويات، مع توثيق حالة البناء والتشطيب بدقة عالية، وفق ما ورد في الأدلة التنظيمية والتشغيلية.
+    </div>
+
+    <div class="gallery-container">
+        <div style="background-color: #cbd5e1; text-align: center; padding: 2px; border: 1px solid #fff;">
+صور الأصل من الخارج
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src=@OutsidePhotos1 alt="photos from the Outside 1">
+            </div>
+            <div class="gallery-card">
+                <img src=@OutsidePhotos2 alt="photos from the Outside 2">
+            </div>
+            <div class="gallery-card">
+                <img src=@OutsidePhotos3 alt="photos from the Outside 3">
+            </div>
+            <div class="gallery-card">
+                <img src=@OutsidePhotos4 alt="photos from the Outside 4">
+        </div>
+    </div>
+     <div style="background-color: #cbd5e1; text-align: center; padding: 2px; border: 1px solid #fff;">
+مثال: صورة للأصل من الخارج وتكون واضحة
+        </div>
+    </div>
+
+
+     <div class="gallery-container">
+        <div style="background-color: #cbd5e1; text-align: center; padding: 2px; border: 1px solid #fff;">
+صور الأصل من الداخل
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src=@InsidePhotos1 alt="photos from the inside 1">
+            </div>
+            <div class="gallery-card">
+                <img src=@InsidePhotos2 alt="photos from the inside 2">
+            </div>
+            <div class="gallery-card">
+                <img src=@InsidePhotos3 alt="photos from the inside 3">
+            </div>
+            <div class="gallery-card">
+                <img src=@InsidePhotos4 alt="photos from the inside 4">
+        </div>
+    </div>
+     <div style="background-color: #cbd5e1; text-align: center; padding: 2px; border: 1px solid #fff;">
+مثال: صور للأصل من الداخل مع إضافة صور المنقولات -إن وجد-
+        </div>
+    </div>
+
+
+     <table>
+        <tr>
+            <td class="label-cell">صورة من الأقمار الصناعية للأصل   </td>
+        </tr>
+        <tr>
+            <td class="value-cell">
+                <img src=@SatelliteImage >
+            </td>
+        </tr>
+        <tr>
+            <td class="label-cell">مثال: صورة للموقع من الأقمار الصناعية </td>
+        </tr>
+    </table>
+
+     <table>
+       <tr>
+            <td class="label-cell">صورة الأصل من المخطط    </td>
+        </tr>
+        <tr>
+            <td class="value-cell">
+                <img src=@OriginalPlanImage  >
+            </td>
+        </tr>
+        <tr>
+            <td class="label-cell">مثال: صورة لكروكي الموقع </td>
+        </tr>
+    </table>
+
+     <table>
+       <tr>
+            <td class="label-cell">صورة صك ملكية الأصل   </td>
+        </tr>
+        <tr>
+            <td class="value-cell">
+                <img src=@originalDeedImg >
+            </td>
+        </tr>
+        <tr>
+            <td class="label-cell">يجب إضافة صك ملكية الأصل المراد تقييمه </td>
+        </tr>
+    </table>
+
+
+    <!-- 17. المشاركون والاعتماد -->
+    <table>
+        <thead>
+            <tr>
+                <th colspan="4">المشاركون في إعداد التقرير</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="label-cell">الاسم</td>
+                <td>@ParticipantName</td>
+                <td class="label-cell">الاسم</td>
+                <td>@ParticipantName</td>
+            </tr>
+            <tr>
+                <td class="label-cell">المسمى الوظيفي</td>
+                <td>@JobTitle</td>
+                <td class="label-cell">المسمى الوظيفي</td>
+                <td>@JobTitle</td>
+            </tr>
+            <tr>
+                <td class="label-cell">فئة العضوية</td>
+                <td>@MembershipCategory</td>
+                <td class="label-cell">فئة العضوية</td>
+                <td>@MembershipCategory</td>
+            </tr>
+            <tr>
+                <td class="label-cell">رقم العضوية</td>
+                <td>@ParticipantMembershipNumber</td>
+                <td class="label-cell">اسم المشارك</td>
+                <td>@ParticipantMembershipNumber</td>
+            </tr>
+            <tr>
+                <td class="label-cell">التوقيع</td>
+                <td>@ParticipantSignature</td>
+                <td class="label-cell">اسم المشارك</td>
+                <td>@ParticipantSignature</td>
+            </tr>
+            
+            
+            <tr>
+                <td class="label-cell" colspan="4"> هذا التقرير تم مراجعته واعتماده من قبل المقيّم المعتمد</td>
+            </tr>
+            <tr>
+            <td class="label-cell">اسم المقيّم المعتمد المراجع</td>
+            <td class="value-cell">@CertifiedReviewerName</td>
+            <td class="label-cell">رقم الترخيص</td>
+            <td class="value-cell">@CertifiedReviewerLicenseNumber</td>
+        </tr>
+        <tr>
+            <td class="label-cell">فرع التقييم</td>
+            <td class="value-cell">@EvaluationBranch</td>
+            <td class="label-cell">فئة العضوية</td>
+            <td class="value-cell">@CertifiedReviewerMembershipCategory</td>
+        </tr>
+        <tr>
+            <td class="label-cell">صفته</td>
+            <td class="value-cell">@CertifiedReviewerAttribute</td>
+            <td class="label-cell">التوقيع</td>
+            <td class="value-cell">@CertifiedReviewerSignature</td>
+        </tr>
+        <tr>
+            <td class="label-cell">تاريخ التقرير</td>
+            <td class="value-cell">@ReportDate</td>
+            <td class="label-cell">ختم المنشأة</td>
+            <td class="value-cell">@CompanySealRating</td>
+        </tr>
+        <tr>
+            <td class="label-cell" colspan="2">صورة ترخيص المقيم</td>
+            <td class="label-cell" colspan="2">صورة ترخيص المنشأة</td>
+        </tr>
+        <tr>
+            <td class="value-cell" colspan="2">
+                <img src=@ResidentLicenseImg >
+            </td>
+            <td class="value-cell" colspan="2">
+                <img src=@ResidentLicenseImg >
+            </td>
+        </tr>
+    
+
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>
